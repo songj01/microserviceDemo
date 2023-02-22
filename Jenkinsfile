@@ -15,6 +15,8 @@ pipeline {
         
         stage('Build') {
             steps {
+            
+                sh'cd product-service'
                 sh 'mvn clean install'
             }
         }
