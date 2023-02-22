@@ -86,7 +86,7 @@ pipeline {
             }
             success {
               
-                subject: 'Build success in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+                echo "Build success in Jenkins: $JOB_NAME - #$BUILD_NUMBER"
             }
             always {
                 cleanWs()
