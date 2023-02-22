@@ -1,13 +1,16 @@
 pipeline {
-    agent any
+    agent {
+    
+      docker {image 'openjdk:11'}
+    }
     
     tools{
        maven 'maven-3.9.0'
-       jdk 'jdk8'
+       
     }
     
     options {
-            timeout(time: 30, unit: 'MINUTES')
+            timeout(time: 5, unit: 'MINUTES')
         }
     stages {
         stage('Checkout') {
