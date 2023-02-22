@@ -14,9 +14,10 @@ pipeline {
         stage('Build') {
             steps {
             
-                sh'cd ${WORKSPACE}/product-service &&mvn -B -DskipTests clean package'
-            
-                sh'cd ${WORKSPACE}/order-service &&mvn -B -DskipTests clean package'
+       
+                sh'cd ${WORKSPACE}/order-service && mvn  clean package  -B -DskipTests'
+                sh'cd ${WORKSPACE}/inventory-service && mvn -B -DskipTests clean package'
+                sh'cd ${WORKSPACE}/product-service && mvn -B -DskipTests clean package'
                 
             }
             
