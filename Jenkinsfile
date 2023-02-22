@@ -30,7 +30,6 @@ pipeline {
                 echo '${JOB_NAME}'
                 echo "${JOB_NAME}"
                 echo  $JOB_NAME
-                echo  ${JOB_NAME}
                 echo  "$JOB_NAME"
             }
         }
