@@ -4,12 +4,17 @@ pipeline {
     tools{
        maven 'maven-3.9.0'
     }
+    
+    options {
+            timeout(time: 1, unit: 'HOURS')
+        }
     stages {
         stage('Checkout') {
             steps {
-         echo  "$JOB_NAME"
-                echo "$BUILD_NUMBER"
-              sh 'cd $WORKSPACE/order-service && cat pom.xml'
+   
+              sh "cd $WORKSPACE/order-service && cat pom.xml"
+              
+              sh "cd $WORKSPACE/product-service && cat pom.xml"
                 
                git 'https://github.com/songj01/microserviceDemo.git'
             }
@@ -31,7 +36,7 @@ pipeline {
          stage('Unit Test') {
             steps {
         
-                echo  "$JOB_NAME"
+        
                 echo "$BUILD_NUMBER"
             }
         }
