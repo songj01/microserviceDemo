@@ -19,7 +19,7 @@ pipeline {
         stage('Build') {
             steps {
             
-                
+                echo  "$JOB_NAME"
                
              //   sh "cd ${WORKSPACE}/order-service && mvn  clean package  -DskipTests"
              //   sh "cd ${WORKSPACE}/inventory-service && mvn  -DskipTests clean package"
