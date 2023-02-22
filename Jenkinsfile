@@ -3,16 +3,18 @@ pipeline {
     
     tools{
        maven 'maven-3.9.0'
+       jdk 'jdk8'
     }
     
     options {
-            timeout(time: 1, unit: 'HOURS')
+            timeout(time: 30, unit: 'MINUTES')
         }
     stages {
         stage('Checkout') {
             steps {
    
-
+               sh 'java --version'
+               sh 'git --version'
                git 'https://github.com/songj01/microserviceDemo.git'
             }
         }
