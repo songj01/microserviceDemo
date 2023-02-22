@@ -17,6 +17,7 @@ pipeline {
             steps {
             
                 sh'cd product-service'
+                sh'mvn clean package'
                 
             }
         }
