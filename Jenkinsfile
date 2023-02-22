@@ -1,9 +1,10 @@
 pipeline {
-    agent any
+    agent {
     
-    
-       tools { 
-        maven 'maven-3.9.0' 
+       docker {
+       
+          image 'maven:3.9.0-eclipse-temurin-11'
+          args '-v /root/.m2:/root/.m2'
     }
 
     stages {
@@ -16,9 +17,15 @@ pipeline {
         stage('Build') {
             steps {
             
-                sh'cd product-service &&mvn clean package'
+                sh'cd ${WORKSPACE}/product-service &&mvn -B -DskipTests clean package'
                 
             }
+             steps {
+            
+                sh'cd ${WORKSPACE}/order-service &&mvn -B -DskipTests clean package'
+                
+            }
+            
         }
         
          stage('Unit Test') {
