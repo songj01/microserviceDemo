@@ -8,11 +8,11 @@ pipeline {
         stage('Checkout') {
             steps {
              echo "${WORKSPACE}"
-     
+     echo  "$JOB_NAME"
                 echo '${JOB_NAME}'
                 echo "${JOB_NAME}"
-                echo  $JOB_NAME
-                echo  "$JOB_NAME"
+              
+                
                git 'https://github.com/songj01/microserviceDemo.git'
             }
         }
