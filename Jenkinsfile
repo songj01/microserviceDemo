@@ -8,7 +8,7 @@ pipeline {
         stage('Checkout') {
             steps {
              echo "${WORKSPACE}"
-               echo "${PROJECT_NAME}"
+     
                 echo '${JOB_NAME}'
                 echo "${JOB_NAME}"
                 echo  $JOB_NAME
