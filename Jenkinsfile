@@ -9,8 +9,7 @@ pipeline {
             steps {
          echo  "$JOB_NAME"
                 echo "$BUILD_NUMBER"
-              sh 'cd $WORKSPACE/order-service'
-              sh 'cat pom.xml'
+              sh 'cd $WORKSPACE/order-service && cat pom.xml'
                 
                git 'https://github.com/songj01/microserviceDemo.git'
             }
