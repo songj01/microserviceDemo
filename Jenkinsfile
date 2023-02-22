@@ -7,6 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+             echo '${WORKSPACE}'
                git 'https://github.com/songj01/microserviceDemo.git'
             }
         }
@@ -14,11 +15,11 @@ pipeline {
         stage('Build') {
             steps {
             
-                echo '$WORKSPACE'
-                echo '$Project_NAME'
-                sh'cd ${WORKSPACE}/microserviceDemo/order-service && mvn  clean package  -B -DskipTests'
-                sh'cd ${WORKSPACE}/microserviceDemo/inventory-service && mvn -B -DskipTests clean package'
-                sh'cd ${WORKSPACE}/microserviceDemo/product-service && mvn -B -DskipTests clean package'
+                
+                echo '${Project_NAME}'
+                sh'cd ${WORKSPACE}/order-service && mvn  clean package  -B -DskipTests'
+                sh'cd ${WORKSPACE}/inventory-service && mvn -B -DskipTests clean package'
+                sh'cd ${WORKSPACE}/product-service && mvn -B -DskipTests clean package'
                 
             }
             
@@ -26,7 +27,7 @@ pipeline {
         
          stage('Unit Test') {
             steps {
-                echo '$JOB_NAME'
+                echo '${JOB_NAME}'
             }
         }
         
