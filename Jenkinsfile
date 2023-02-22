@@ -24,7 +24,7 @@ pipeline {
             steps {
             
                 echo  "$JOB_NAME"
-                echo  "$PROJECT_NAME"
+                echo  "${env.PROJECT_NAME}"
                
              //   sh "cd ${WORKSPACE}/order-service && mvn  clean package  -DskipTests"
              //   sh "cd ${WORKSPACE}/inventory-service && mvn  -DskipTests clean package"
