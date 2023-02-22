@@ -64,7 +64,7 @@ pipeline {
         
          stage('Build Docker image') {
             steps {
-                echo 'this a test stage'
+                echo 'this a test stage1'
             }
         }
     }
