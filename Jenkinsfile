@@ -81,14 +81,12 @@ pipeline {
     }
      post {
             failure {
-                emailext attachLog: true, body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}',
-                to: env.commiteremail + env.EMAIL_TO,
-                subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+               echo "Build failed in Jenkins: $JOB_NAME - #$BUILD_NUMBER"
+          
             }
             unstable {
-                emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
-                to: env.commiteremail + env.EMAIL_TO,
-                subject: 'Unstable build in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+          
+                echo 'Unstable build in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
             }
             success {
               
