@@ -18,9 +18,6 @@ pipeline {
             steps {
             
                 sh'cd ${WORKSPACE}/product-service &&mvn -B -DskipTests clean package'
-                
-            }
-             steps {
             
                 sh'cd ${WORKSPACE}/order-service &&mvn -B -DskipTests clean package'
                 
