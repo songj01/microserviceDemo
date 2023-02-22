@@ -7,10 +7,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-             echo "$WORKSPACE"
-     echo  "$PROJECT_NAME"
-                echo '${JOB_NAME}'
-                echo "${JOB_NAME}"
+         echo  "$JOB_NAME"
+                echo "$BUILD_NUMBER"
               sh 'cd $WORKSPACE/order-service'
               sh 'cat pom.xml'
                 
@@ -22,10 +20,10 @@ pipeline {
             steps {
             
                 
-                 sh 'cd $WORKSPACE/order-service'
-                sh "cd ${WORKSPACE}/order-service && mvn  clean package  -B -DskipTests"
-                sh "cd ${WORKSPACE}/inventory-service && mvn -B -DskipTests clean package"
-                sh "cd ${WORKSPACE}/product-service && mvn -B -DskipTests clean package"
+               
+             //   sh "cd ${WORKSPACE}/order-service && mvn  clean package  -DskipTests"
+             //   sh "cd ${WORKSPACE}/inventory-service && mvn  -DskipTests clean package"
+              //  sh "cd ${WORKSPACE}/product-service && mvn -B -DskipTests clean package"
                 
             }
             
@@ -33,10 +31,9 @@ pipeline {
         
          stage('Unit Test') {
             steps {
-                echo '${JOB_NAME}'
-                echo "${JOB_NAME}"
-                echo  $JOB_NAME
+        
                 echo  "$JOB_NAME"
+                echo "$BUILD_NUMBER"
             }
         }
         
@@ -77,4 +74,25 @@ pipeline {
             }
         }
     }
+     post {
+            failure {
+                emailext attachLog: true, body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}',
+                to: env.commiteremail + env.EMAIL_TO,
+                subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+            }
+            unstable {
+                emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+                to: env.commiteremail + env.EMAIL_TO,
+                subject: 'Unstable build in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+            }
+            success {
+                emailext attachLog: true, body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}',
+                to: env.commiteremail + env.EMAIL_TO,
+                subject: 'Build success in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+            }
+            always {
+                cleanWs()
+            }
+        }
+
 }
