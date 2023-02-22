@@ -14,10 +14,11 @@ pipeline {
         stage('Build') {
             steps {
             
-       
-                sh'cd ${WORKSPACE}/order-service && mvn  clean package  -B -DskipTests'
-                sh'cd ${WORKSPACE}/inventory-service && mvn -B -DskipTests clean package'
-                sh'cd ${WORKSPACE}/product-service && mvn -B -DskipTests clean package'
+                echo "$WORKSPACE"
+                echo "$Project_NAME"
+               // sh'cd ${WORKSPACE}/microserviceDemo/order-service && mvn  clean package  -B -DskipTests'
+               // sh'cd ${WORKSPACE}/microserviceDemo/inventory-service && mvn -B -DskipTests clean package'
+              //  sh'cd ${WORKSPACE}/microserviceDemo/product-service && mvn -B -DskipTests clean package'
                 
             }
             
@@ -25,7 +26,7 @@ pipeline {
         
          stage('Unit Test') {
             steps {
-                echo 'this a test stage'
+                echo "$JOB_NAME"
             }
         }
         
