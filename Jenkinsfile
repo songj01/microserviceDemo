@@ -12,10 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
    
-              sh "cd $WORKSPACE/order-service && cat pom.xml"
-              
-              sh "cd $WORKSPACE/product-service && cat pom.xml"
-                
+
                git 'https://github.com/songj01/microserviceDemo.git'
             }
         }
@@ -24,11 +21,11 @@ pipeline {
             steps {
             
                 echo  "$JOB_NAME"
-                echo  "${env.PROJECT_NAME}"
+             
                
-             //   sh "cd ${WORKSPACE}/order-service && mvn  clean package  -DskipTests"
-             //   sh "cd ${WORKSPACE}/inventory-service && mvn  -DskipTests clean package"
-              //  sh "cd ${WORKSPACE}/product-service && mvn -B -DskipTests clean package"
+                sh "cd ${WORKSPACE}/order-service && mvn  clean package  -DskipTests"
+                sh "cd ${WORKSPACE}/inventory-service && mvn  -DskipTests clean package"
+                sh "cd ${WORKSPACE}/product-service && mvn -B -DskipTests clean package"
                 
             }
             
