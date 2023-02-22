@@ -16,8 +16,7 @@ pipeline {
         stage('Build') {
             steps {
             
-                sh'cd product-service'
-                sh'mvn clean package'
+                sh'cd product-service &&mvn clean package'
                 
             }
         }
